@@ -1,58 +1,34 @@
-import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
+import { StoreContext } from "../../context/Context";
 
-const Resheniya = () => {
-  const [korobka, setKorobka] = useState<boolean>(false);
-  const [oblako, setOblako] = useState<boolean>(false);
-  const [svet, setSvet] = useState<boolean>(false);
-  const [figure, setFigure] = useState<boolean>(false);
-  const [balons, setbalons] = useState<boolean>(false);
+const Resheniya = observer(() => {
+  const resheniya = [
+    "Коробка сюрприз с шарами",
+    "Облака из шаров",
+    "Светящиеся шары",
+    "Ходячие фигурки",
+    "Фигурки из шаров",
+  ];
+  const { resheniyaStore } = useContext(StoreContext);
 
   return (
     <div className="cont-for-input-and-li">
       <ul className="list">
-        <li className="list_item">
-          <input
-            className="checkbox checkbox mr-2 mt-3  "
-            type="checkbox"
-            onClick={() => setKorobka(!korobka)}
-          />
-          Коробка сюрприз с шарами
-        </li>
-        <li className="list_item">
-          <input
-            className="checkbox checkbox mr-2 mt-3 "
-            type="checkbox"
-            onClick={() => setOblako(!oblako)}
-          />
-          Облака из шаров
-        </li>
-        <li className="list_item">
-          <input
-            className="checkbox checkbox mr-2 mt-3 "
-            type="checkbox"
-            onClick={() => setSvet(!svet)}
-          />
-          Светящиеся шары
-        </li>
-        <li className="list_item">
-          <input
-            className="checkbox checkbox mr-2 mt-3 "
-            type="checkbox"
-            onClick={() => setFigure(!figure)}
-          />
-          Ходячие фигурки
-        </li>
-        <li className="list_item">
-          <input
-            onClick={() => setbalons(!balons)}
-            className="checkbox checkbox mr-2 mt-3 mb-5 "
-            type="checkbox"
-          />
-          Фигурки из шаров
-        </li>
+        {resheniya.map((reshenie) => (
+          <li className="list_item" key={reshenie}>
+            <input
+              className="checkbox checkbox mr-2 mt-3"
+              type="checkbox"
+              checked={resheniyaStore.resheniya.includes(reshenie)}
+              onChange={() => resheniyaStore.toggleReshenie(reshenie)}
+            />
+            {reshenie}
+          </li>
+        ))}
       </ul>
     </div>
   );
-};
+});
 
 export default Resheniya;

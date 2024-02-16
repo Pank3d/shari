@@ -7,7 +7,7 @@ import { StoreContext } from "../../context/Context";
 
 const CardForm = observer(() => {
   const [items, setItems] = useState<ItemInter[] | null>(null);
-  const { genderStore, merStore } = useContext(StoreContext);
+  const { genderStore, merStore, resheniyaStore } = useContext(StoreContext); // Добавьте resheniyaStore
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -49,7 +49,11 @@ const CardForm = observer(() => {
     const isMerMatch =
       merStore.typeMer.length === 0 || merStore.typeMer.includes(item.typeMer);
 
-    return isGenderMatch && isMerMatch;
+    const isReshMatch = 
+      resheniyaStore.resheniya.length === 0 ||
+      resheniyaStore.resheniya.includes(item.typeResh);
+
+    return isGenderMatch && isMerMatch && isReshMatch; 
   });
 
   return (

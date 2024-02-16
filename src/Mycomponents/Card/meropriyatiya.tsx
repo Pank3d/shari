@@ -3,7 +3,7 @@ import { StoreContext } from "../../context/Context";
 import { observer } from "mobx-react";
 
 const Meropriyatiya: React.FC = observer(() => {
-  const { merStore, genderStore } = useContext(StoreContext);
+  const { merStore} = useContext(StoreContext);
 
   const handleCheckboxChange = (type: string) => {
     merStore.toggleType(type);

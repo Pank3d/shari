@@ -5,7 +5,7 @@ import FilterPrice from "../Filter/FilterPrice";
 import { StoreContext } from "../../context/Context";
 
 const MainCatalog: React.FC = observer(() => {
-  const { genderStore, merStore } = useContext(StoreContext);
+  const { genderStore } = useContext(StoreContext);
 
   return (
     <div className="flex">

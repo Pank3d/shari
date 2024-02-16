@@ -11,7 +11,6 @@ export const Card = ({
   typeGender,
   typeMer,
   typeResh,
-  id,
 }: CardInterface) => {
   return (
     <div className="grid grid-cols-1">
