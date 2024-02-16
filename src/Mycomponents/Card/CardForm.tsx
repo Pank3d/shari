@@ -7,7 +7,7 @@ import { StoreContext } from "../../context/Context";
 
 const CardForm = observer(() => {
   const [items, setItems] = useState<ItemInter[] | null>(null);
-  const { genderStore, merStore, resheniyaStore } = useContext(StoreContext); // Добавьте resheniyaStore
+  const { genderStore, merStore, resheniyaStore } = useContext(StoreContext); 
 
   useEffect(() => {
     const fetchAll = async () => {
