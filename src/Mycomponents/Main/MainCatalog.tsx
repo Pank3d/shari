@@ -1,8 +1,12 @@
+import React, { useContext } from "react";
+import { observer } from "mobx-react";
 import CardForm from "../Card/CardForm";
-import FilterPrice from "../Filter/FilterPrice"
+import FilterPrice from "../Filter/FilterPrice";
+import { StoreContext } from "../../context/StoreContext";
 
-
-function MainCatalog() {
+const MainCatalog: React.FC = observer(() => {
+  const { genderStore } = useContext(StoreContext);
+  
   return (
     <div className="flex">
       <div className="">
@@ -12,23 +16,32 @@ function MainCatalog() {
         <div>
           <ul className="flex gap-5 pl-4">
             <li className="flex ">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => genderStore.toggleGenderChildren()}
+              />
               <p>для детей</p>
             </li>
             <li className="flex">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => genderStore.toggleGenderMan()}
+              />
               <p>для него</p>
             </li>
             <li className="flex">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => genderStore.toggleGenderWoman()}
+              />
               <p>для неё</p>
             </li>
-            <CardForm />
           </ul>
+          <CardForm />
         </div>
       </div>
     </div>
   );
-}
+});
 
-export default MainCatalog
+export default MainCatalog;

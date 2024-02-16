@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import{ useState } from 'react'
 import HidePriceFilter from './HidePriceFilter';
+import Meropriyatiya from '../Card/meropriyatiya';
+import Resheniya from '../Card/Resheniya';
 
 
 function FilterPrice() {
@@ -15,7 +17,7 @@ function FilterPrice() {
       <div className="price_filter">
         <div className="flex mb-4">
           <h2 className="price">Price</h2>
-          <button
+          <button 
             onClick={() => setHideFilt(!hideFilt)}
             className="hide_button"
           >
@@ -23,7 +25,7 @@ function FilterPrice() {
           </button>
         </div>
         <div className="filters-input">
-          {!hideFilt ? <HidePriceFilter /> : <></>}
+          {!hideFilt ? <HidePriceFilter/> : <></>}
         </div>
       </div>
       <div className="flex mb-4">
@@ -34,32 +36,7 @@ function FilterPrice() {
           </button>
         </div>
       </div>
-      {!hideMer ? (
-        <div className="cont-for-input-and-li">
-          <ul className="">
-            <li className="list_item">
-              <input className="checkbox mr-2 mt-3  " type="checkbox" />
-              Выписка
-            </li>
-            <li className="list_item">
-              <input className="checkbox mr-2 mt-3 " type="checkbox" />
-              Свадьба
-            </li>
-            <li className="list_item">
-              <input className="checkbox mr-2 mt-3 " type="checkbox" />
-              Выпускные
-            </li>
-            <li className="list_item">
-              <input className="checkbox mr-2 mt-3 " type="checkbox" />
-              День влюбленных
-            </li>
-            <li className="list_item">
-              <input className="checkbox mr-2 mt-3 " type="checkbox" />
-              Фотозона
-            </li>
-          </ul>
-        </div>
-      ) : (
+      {!hideMer ? (<Meropriyatiya/>) : (
         <></>
       )}
       <div className="flex mb-4">
@@ -71,36 +48,7 @@ function FilterPrice() {
         </div>
       </div>
       {!hideOrg ? (
-        <div className="cont-for-input-and-li">
-          <ul className="list">
-            <li className="list_item">
-              <input
-                className="checkbox checkbox mr-2 mt-3  "
-                type="checkbox"
-              />
-              Коробка сюрприз с шарами
-            </li>
-            <li className="list_item">
-              <input className="checkbox checkbox mr-2 mt-3 " type="checkbox" />
-              Облака из шаров
-            </li>
-            <li className="list_item">
-              <input className="checkbox checkbox mr-2 mt-3 " type="checkbox" />
-              Светящиеся шары
-            </li>
-            <li className="list_item">
-              <input className="checkbox checkbox mr-2 mt-3 " type="checkbox" />
-              Ходячие фигурки
-            </li>
-            <li className="list_item">
-              <input
-                className="checkbox checkbox mr-2 mt-3 mb-5 "
-                type="checkbox"
-              />
-              Фигурки из шаров
-            </li>
-          </ul>
-        </div>
+       <Resheniya/>
       ) : (
         <></>
       )}

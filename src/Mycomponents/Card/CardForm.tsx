@@ -1,89 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import { StoreContext } from "../../context/StoreContext";
 import { getGender, getEvent, getReshenie } from "../../api/api";
-import { useParams } from "react-router-dom";
+import Card from "./Card";
+import { ItemInter } from "../../type/type";
 
-type Attributes = {
-  type: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-};
 
-type Meta = {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-};
 
-interface Data {
-  id: number;
-  attributes: Attributes;
-}
-
-interface ResponseData {
-  data: Data[];
-  meta: Meta;
-}
-
-const CardForm = () => {
-  const [gender, setGender] = useState<ResponseData | null>(null);
-  const [event, setEvent] = useState<ResponseData | null>(null);
-  const [reshenie, setReshenie] = useState<ResponseData | null>(null);
-  
-
-  const fetchGender = async () => {
-    try {
-      const response = await getGender();
-      setGender(response);
-      console.log(gender);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const CardForm = observer(() => {
+  const [items, setItems] = useState<ItemInter[] | null>(null);
+  const { genderStore } = useContext(StoreContext);
 
   useEffect(() => {
-    fetchGender();
+    const fetchAll = async () => {
+      try {
+        const [genderRes, eventRes, reshenieRes] = await Promise.all([
+          getGender(),
+          getEvent(),
+          getReshenie(),
+        ]);
+
+        const items = genderRes.data.map(
+          (item: { id: number }, index: string | number) => ({
+            id: item.id,
+            imageUrl: "src/assets/1.png",
+            typeGender: genderRes.data[index].attributes.type,
+            typeMer: eventRes.data[index]?.attributes.type,
+            typeResh: reshenieRes.data[index]?.attributes.type,
+          })
+        );
+
+        setItems(items);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAll();
   }, []);
-
-
-
-  const fetchEvent = async () => {
-    try {
-      const response = await getEvent();
-      setEvent(response);
-      console.log(event);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchEvent();
-  }, []);
-
-  const fetchReshenie = async () => {
-    try {
-      const response = await getReshenie();
-      setReshenie(response);
-      console.log(reshenie);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchReshenie();
-  }, []);
-
 
   
+const filteredItems = items?.filter((item) => {
+  if (
+    !genderStore.genderChildren &&
+    !genderStore.genderMan &&
+    !genderStore.genderWoman
+  ) {
+    return true;
+  }
+  if (genderStore.genderChildren && item.typeGender === "Для детей") {
+    return true;
+  }
+  if (genderStore.genderMan && item.typeGender === "Для него") {
+    return true;
+  }
+  if (genderStore.genderWoman && item.typeGender === "Для нее") {
+    return true;
+  }
+  return false;
+});
 
   return (
     <>
-      
+      {filteredItems?.map((item) => (
+        <Card
+          key={item.id}
+          id={item.id}
+          imageUrl={item.imageUrl}
+          typeGender={item.typeGender}
+          typeMer={item.typeMer}
+          typeResh={item.typeResh}
+        />
+      ))}
     </>
   );
-};
+});
 
 export default CardForm;
