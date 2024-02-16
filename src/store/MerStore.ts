@@ -1,36 +1,23 @@
 import { makeAutoObservable } from "mobx";
 
-class merStore {
-  vipiska = false;
-  svadba = false;
-  vipusk = false;
-  loveDay = false;
-  fhotoZone = false;
-  typeMer: any;
+class MerStore {
+  typeMer: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  toggleVipiska() {
-    this.vipiska = !this.vipiska;
+  setTypeMer(typeMer: string[]): void {
+    this.typeMer = typeMer;
   }
 
-  toggleSvadba() {
-    this.svadba = !this.svadba;
-  }
-
-  toggleVipusk() {
-    this.vipusk = !this.vipusk;
-  }
-
-  toggleLoveDay() {
-    this.loveDay = !this.loveDay;
-  }
-
-  toggleFhotoZone() {
-    this.fhotoZone = !this.fhotoZone;
+  toggleType(type: string): void {
+    if (this.typeMer.includes(type)) {
+      this.typeMer = this.typeMer.filter((t) => t !== type);
+    } else {
+      this.typeMer.push(type);
+    }
   }
 }
 
-export default new merStore();
+export default new MerStore();

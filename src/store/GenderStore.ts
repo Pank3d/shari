@@ -4,7 +4,7 @@ class GenderStore {
   genderMan = false;
   genderWoman = false;
   genderChildren = false;
-  gender: string;
+  gender: string | undefined;
 
   constructor() {
     makeAutoObservable(this);

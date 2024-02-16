@@ -2,50 +2,54 @@ import { useContext } from "react";
 import { StoreContext } from "../../context/Context";
 import { observer } from "mobx-react";
 
-const Meropriyatiya:React.FC = observer(() => {
-  
-const {merStore} = useContext(StoreContext)
+const Meropriyatiya: React.FC = observer(() => {
+  const { merStore, genderStore } = useContext(StoreContext);
+
+  const handleCheckboxChange = (type: string) => {
+    merStore.toggleType(type);
+  };
+
   return (
     <div>
       <div className="cont-for-input-and-li">
         <ul className="">
           <li className="list_item">
             <input
-              className="checkbox mr-2 mt-3  "
+              className="checkbox mr-2 mt-3"
               type="checkbox"
-              onClick={() => merStore.toggleVipiska()  }
+              onClick={() => handleCheckboxChange("Выписка")}
             />
             Выписка
           </li>
           <li className="list_item">
             <input
-              className="checkbox mr-2 mt-3 "
+              className="checkbox mr-2 mt-3"
               type="checkbox"
-              onClick={() => merStore.toggleSvadba()} 
+              onClick={() => handleCheckboxChange("Свадьба")}
             />
             Свадьба
           </li>
           <li className="list_item">
             <input
-              className="checkbox mr-2 mt-3 "
+              className="checkbox mr-2 mt-3"
               type="checkbox"
-              onClick={() => merStore.toggleVipusk() }
+              onClick={() => handleCheckboxChange("Выпускные")}
             />
             Выпускные
           </li>
           <li className="list_item">
             <input
-              className="checkbox mr-2 mt-3 "
+              className="checkbox mr-2 mt-3"
               type="checkbox"
-              onClick={() => merStore.toggleLoveDay() }
+              onClick={() => handleCheckboxChange("День влюбленных")}
             />
             День влюбленных
           </li>
           <li className="list_item">
             <input
-              className="checkbox mr-2 mt-3 "
+              className="checkbox mr-2 mt-3"
               type="checkbox"
-              onClick={() => merStore.toggleFhotoZone() }
+              onClick={() => handleCheckboxChange("Фотозона")}
             />
             Фотозона
           </li>
@@ -53,7 +57,6 @@ const {merStore} = useContext(StoreContext)
       </div>
     </div>
   );
-}
-)
+});
 
 export default Meropriyatiya;
