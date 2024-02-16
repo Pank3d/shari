@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { StoreContext } from "../../context/MerContext";
+import { StoreContext } from "../../context/Context";
 import { observer } from "mobx-react";
 
 const Meropriyatiya:React.FC = observer(() => {

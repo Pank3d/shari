@@ -6,6 +6,7 @@ class merStore {
   vipusk = false;
   loveDay = false;
   fhotoZone = false;
+  typeMer: any;
 
   constructor() {
     makeAutoObservable(this);

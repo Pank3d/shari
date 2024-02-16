@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react";
 import CardForm from "../Card/CardForm";
 import FilterPrice from "../Filter/FilterPrice";
-import { StoreContext } from "../../context/StoreContext";
+import { StoreContext } from "../../context/Context";
 
 const MainCatalog: React.FC = observer(() => {
-  const { genderStore } = useContext(StoreContext);
-  
+  const { genderStore, merStore } = useContext(StoreContext);
+
   return (
     <div className="flex">
       <div className="">
@@ -36,6 +36,7 @@ const MainCatalog: React.FC = observer(() => {
               />
               <p>для неё</p>
             </li>
+            
           </ul>
           <CardForm />
         </div>

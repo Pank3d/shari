@@ -1,15 +1,17 @@
 import React from "react";
 import merStore from "../store/MerStore";
+import genderStore from "../store/GenderStore";
 
 export const StoreContext = React.createContext({
-  merStore: merStore,
+  merStore,
+  genderStore,
 });
 
-export const StoreMerProvider: React.FC<{ children: React.ReactNode }> = ({
+export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <StoreContext.Provider value={{ merStore: merStore }}>
+    <StoreContext.Provider value={{ merStore, genderStore }}>
       {children}
     </StoreContext.Provider>
   );
